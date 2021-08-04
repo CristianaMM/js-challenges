@@ -9,7 +9,7 @@ const {
   calculateLifetimeSupply,
   getGrade,
   calculateAreaOfCirlce,
-  getStudentSummary
+  getStudentSummary,
 } = challenge;
 
 describe("createFullName() tests", () => {
@@ -26,7 +26,7 @@ describe("createFullName() tests", () => {
   });
 });
 
-xdescribe("findSmallestNumber() tests", () => {
+describe("findSmallestNumber() tests", () => {
   it("Should have a return", () => {
     expect(findSmallestNumber(100, 200)).toBeDefined();
   });
@@ -41,7 +41,7 @@ xdescribe("findSmallestNumber() tests", () => {
   });
 });
 
-xdescribe("multiplyNumbers() tests", () => {
+describe("multiplyNumbers() tests", () => {
   it("Should have a return", () => {
     expect(multiplyNumbers(2, 6)).toBeDefined();
   });
@@ -55,7 +55,7 @@ xdescribe("multiplyNumbers() tests", () => {
   });
 });
 
-xdescribe("checkIfNewHighScore() tests", () => {
+describe("checkIfNewHighScore() tests", () => {
   it("Should have a return", () => {
     expect(checkIfNewHighScore(300, 325)).toBeDefined();
   });
@@ -73,7 +73,7 @@ xdescribe("checkIfNewHighScore() tests", () => {
   });
 });
 
-xdescribe("celsiusToFahrenheit() tests", () => {
+describe("celsiusToFahrenheit() tests", () => {
   it("Should have a return", () => {
     expect(celsiusToFahrenheit(15)).toBeDefined();
   });
@@ -83,11 +83,13 @@ xdescribe("celsiusToFahrenheit() tests", () => {
   });
 
   it("Should convert 15 C to 59 F", () => {
-    expect(celsiusToFahrenheit(15)).toBe("15 degrees celsius is 59 degrees fahrenheit");
+    expect(celsiusToFahrenheit(15)).toBe(
+      "15 degrees celsius is 59 degrees fahrenheit"
+    );
   });
 });
 
-xdescribe("calculateLifeTimeSupply() tests", () => {
+describe("calculateLifeTimeSupply() tests", () => {
   it("Should have a return", () => {
     expect(calculateLifetimeSupply(2, 25, 90)).toBeDefined();
   });
@@ -101,7 +103,7 @@ xdescribe("calculateLifeTimeSupply() tests", () => {
   });
 });
 
-xdescribe("getGrade() tests", () => {
+describe("getGrade() tests", () => {
   it("Should have a return", () => {
     expect(getGrade(70)).toBeDefined();
   });
@@ -144,7 +146,7 @@ xdescribe("getGrade() tests", () => {
   });
 });
 
-xdescribe("calculateAreaOfCircle() tests", () => {
+describe("calculateAreaOfCircle() tests", () => {
   it("Should have a return", () => {
     expect(calculateAreaOfCirlce(3)).toBeDefined();
   });
@@ -164,7 +166,7 @@ xdescribe("calculateAreaOfCircle() tests", () => {
   });
 });
 
-xdescribe("getStudentSummary() tests", () => {
+describe("getStudentSummary() tests", () => {
   it("Should have a return", () => {
     expect(getStudentSummary(70, "John")).toBeDefined();
   });
@@ -174,38 +176,68 @@ xdescribe("getStudentSummary() tests", () => {
   });
 
   it("Should return 'My apologies NAME, there's been an error in processing your grade.' if a grade cannot be found", () => {
-    expect(getStudentSummary(120, "John")).toBe("My apologies John, there's been an error in processing your grade.");
-    expect(getStudentSummary(-20, "John")).toBe("My apologies John, there's been an error in processing your grade.");
-    expect(getStudentSummary("70", "John")).toBe("My apologies John, there's been an error in processing your grade.");
+    expect(getStudentSummary(120, "John")).toBe(
+      "My apologies John, there's been an error in processing your grade."
+    );
+    expect(getStudentSummary(-20, "John")).toBe(
+      "My apologies John, there's been an error in processing your grade."
+    );
+    expect(getStudentSummary("70", "John")).toBe(
+      "My apologies John, there's been an error in processing your grade."
+    );
   });
 
   it("Should return the correct summary for a score of over 79", () => {
-    expect(getStudentSummary(100, "John")).toBe("Congratulations John! You achieved a grade of A.");
-    expect(getStudentSummary(80, "Jane")).toBe("Congratulations Jane! You achieved a grade of A.");
+    expect(getStudentSummary(100, "John")).toBe(
+      "Congratulations John! You achieved a grade of A."
+    );
+    expect(getStudentSummary(80, "Jane")).toBe(
+      "Congratulations Jane! You achieved a grade of A."
+    );
   });
 
   it("Should return the correct summary for a score betweem 79 - 70", () => {
-    expect(getStudentSummary(79, "John")).toBe("Well done John! You achieved a grade of B.");
-    expect(getStudentSummary(70, "Jane")).toBe("Well done Jane! You achieved a grade of B.");
+    expect(getStudentSummary(79, "John")).toBe(
+      "Well done John! You achieved a grade of B."
+    );
+    expect(getStudentSummary(70, "Jane")).toBe(
+      "Well done Jane! You achieved a grade of B."
+    );
   });
 
   it("Should return the correct summary for a score betweem 69 - 60", () => {
-    expect(getStudentSummary(69, "John")).toBe("Nicely done John! You achieved a grade of C.");
-    expect(getStudentSummary(60, "Jane")).toBe("Nicely done Jane! You achieved a grade of C.");
+    expect(getStudentSummary(69, "John")).toBe(
+      "Nicely done John! You achieved a grade of C."
+    );
+    expect(getStudentSummary(60, "Jane")).toBe(
+      "Nicely done Jane! You achieved a grade of C."
+    );
   });
 
   it("Should return the correct summary for a score betweem 59 - 50", () => {
-    expect(getStudentSummary(59, "John")).toBe("That's okay John. You achieved a grade of D.");
-    expect(getStudentSummary(50, "Jane")).toBe("That's okay Jane. You achieved a grade of D.");
+    expect(getStudentSummary(59, "John")).toBe(
+      "That's okay John. You achieved a grade of D."
+    );
+    expect(getStudentSummary(50, "Jane")).toBe(
+      "That's okay Jane. You achieved a grade of D."
+    );
   });
 
   it("Should return the correct summary for a score betweem 49 - 40", () => {
-    expect(getStudentSummary(49, "John")).toBe("Too bad John. You achieved a grade of E.");
-    expect(getStudentSummary(40, "Jane")).toBe("Too bad Jane. You achieved a grade of E.");
+    expect(getStudentSummary(49, "John")).toBe(
+      "Too bad John. You achieved a grade of E."
+    );
+    expect(getStudentSummary(40, "Jane")).toBe(
+      "Too bad Jane. You achieved a grade of E."
+    );
   });
 
   it("Should return the correct summary for a score betweem 39 - 0", () => {
-    expect(getStudentSummary(39, "John")).toBe("Sorry John. You achieved a grade of F. There's always next year.");
-    expect(getStudentSummary(0, "Jane")).toBe("Sorry Jane. You achieved a grade of F. There's always next year.");
+    expect(getStudentSummary(39, "John")).toBe(
+      "Sorry John. You achieved a grade of F. There's always next year."
+    );
+    expect(getStudentSummary(0, "Jane")).toBe(
+      "Sorry Jane. You achieved a grade of F. There's always next year."
+    );
   });
 });
