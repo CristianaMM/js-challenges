@@ -9,7 +9,7 @@ const {
   accessGivenKey,
   getUserAddress,
   setSafeAllergens,
-  mergeFurniture
+  mergeFurniture,
 } = challenge;
 
 describe("getFurniturePrice() tests", () => {
@@ -22,7 +22,7 @@ describe("getFurniturePrice() tests", () => {
   });
 });
 
-xdescribe("addFurnitureStorLocation() tests", () => {
+describe("addFurnitureStorLocation() tests", () => {
   const table = { name: "lack", price: 6 };
   const cabinet = { name: "brimnes", price: 55 };
 
@@ -46,30 +46,49 @@ xdescribe("addFurnitureStorLocation() tests", () => {
   });
 
   it("Should exactly match given object", () => {
-    expect(tableWithLocation).toStrictEqual({ name: "lack", price: 6, location: "Bristol" });
-    expect(cabinetWithLocation).toStrictEqual({ name: "brimnes", price: 55, location: "Cardiff" });
+    expect(tableWithLocation).toStrictEqual({
+      name: "lack",
+      price: 6,
+      location: "Bristol",
+    });
+    expect(cabinetWithLocation).toStrictEqual({
+      name: "brimnes",
+      price: 55,
+      location: "Cardiff",
+    });
   });
 });
 
-xdescribe("makeSpaceship() tests", () => {
+describe("makeSpaceship() tests", () => {
   it("Should return an object", () => {
-    expect(typeof makeSpaceship("rocinante", 8, "epstein drive", true)).toBe("object");
+    expect(typeof makeSpaceship("rocinante", 8, "epstein drive", true)).toBe(
+      "object"
+    );
   });
 
-  const rocinante = { name: "rocinante", noOfSeats: 8, engineType: "epstein drive", canTravelSolarSystems: true };
+  const rocinante = {
+    name: "rocinante",
+    noOfSeats: 8,
+    engineType: "epstein drive",
+    canTravelSolarSystems: true,
+  };
   const enterprise = {
     name: "uss enterprise (ncc-1701-d)",
     noOfSeats: 5,
     engineType: "impulse drive",
-    canTravelSolarSystems: true
+    canTravelSolarSystems: true,
   };
   it("Should create an object with the provided arguments as values", () => {
-    expect(makeSpaceship("rocinante", 8, "epstein drive", true)).toStrictEqual(rocinante);
-    expect(makeSpaceship("uss enterprise (ncc-1701-d)", 5, "impulse drive", true)).toStrictEqual(enterprise);
+    expect(makeSpaceship("rocinante", 8, "epstein drive", true)).toStrictEqual(
+      rocinante
+    );
+    expect(
+      makeSpaceship("uss enterprise (ncc-1701-d)", 5, "impulse drive", true)
+    ).toStrictEqual(enterprise);
   });
 });
 
-xdescribe("setUserName() tests", () => {
+describe("setUserName() tests", () => {
   const user1 = { name: "john smith", username: "johnnyboiii" };
   const user2 = { name: "jane doe", username: "killerZ" };
   it("Should return and object", () => {
@@ -87,13 +106,19 @@ xdescribe("setUserName() tests", () => {
   const user4 = { name: "gimli son of gloin" };
   it("Should change the username if none exists", () => {
     expect(setUserName(user3, "mallcop12").username).toBe("mallcop12");
-    expect(setUserName(user3, "mallcop12")).toStrictEqual({ name: "paul blart", username: "mallcop12" });
+    expect(setUserName(user3, "mallcop12")).toStrictEqual({
+      name: "paul blart",
+      username: "mallcop12",
+    });
     expect(setUserName(user4, "ih8elves").username).toBe("ih8elves");
-    expect(setUserName(user4, "ih8elves")).toStrictEqual({ name: "gimli son of gloin", username: "ih8elves" });
+    expect(setUserName(user4, "ih8elves")).toStrictEqual({
+      name: "gimli son of gloin",
+      username: "ih8elves",
+    });
   });
 });
 
-xdescribe("splitFullNameToFirstAndLast() tests", () => {
+describe("splitFullNameToFirstAndLast() tests", () => {
   const customer1 = { fullName: "Barry Chuckle" };
   const customer2 = { fullName: "Paul Chuckle" };
 
@@ -101,19 +126,24 @@ xdescribe("splitFullNameToFirstAndLast() tests", () => {
     expect(splitFullNameToFirstAndLast(customer1)).toStrictEqual({
       fullName: "Barry Chuckle",
       firstName: "Barry",
-      lastName: "Chuckle"
+      lastName: "Chuckle",
     });
 
     expect(splitFullNameToFirstAndLast(customer2)).toStrictEqual({
       fullName: "Paul Chuckle",
       firstName: "Paul",
-      lastName: "Chuckle"
+      lastName: "Chuckle",
     });
   });
 });
 
-xdescribe("accessGivenKey() tests", () => {
-  const person = { name: "Joe Bloggs", height: 170, eyeColour: "blue", likesIceCream: false };
+describe("accessGivenKey() tests", () => {
+  const person = {
+    name: "Joe Bloggs",
+    height: 170,
+    eyeColour: "blue",
+    likesIceCream: false,
+  };
 
   it("Should access the eyeColour property", () => {
     expect(accessGivenKey(person, "eyeColour")).toBe("blue");
@@ -132,7 +162,7 @@ xdescribe("accessGivenKey() tests", () => {
   });
 });
 
-xdescribe("getUserAddress() tests", () => {
+describe("getUserAddress() tests", () => {
   const user1 = {
     id: 101,
     name: "Harry Potter",
@@ -140,8 +170,8 @@ xdescribe("getUserAddress() tests", () => {
       line1: "4 Privet Drive",
       line2: "Little Whinging",
       city: "Surrey",
-      postcode: "CR3 0AA"
-    }
+      postcode: "CR3 0AA",
+    },
   };
 
   const user2 = {
@@ -151,17 +181,19 @@ xdescribe("getUserAddress() tests", () => {
       line1: "32",
       line2: "Windsor Gardens",
       city: "London",
-      postcode: "W9 3RG"
-    }
+      postcode: "W9 3RG",
+    },
   };
 
   it("Should be able to get the address from the user object", () => {
-    expect(getUserAddress(user1)).toBe("4 Privet Drive Little Whinging Surrey CR3 0AA");
+    expect(getUserAddress(user1)).toBe(
+      "4 Privet Drive Little Whinging Surrey CR3 0AA"
+    );
     expect(getUserAddress(user2)).toBe("32 Windsor Gardens London W9 3RG");
   });
 });
 
-xdescribe("setSafeAllergens() tests", () => {
+describe("setSafeAllergens() tests", () => {
   const allergenList = [
     "celery",
     "gluten",
@@ -176,17 +208,19 @@ xdescribe("setSafeAllergens() tests", () => {
     "sesame",
     "soybeans",
     "sulphites",
-    "tree nuts"
+    "tree nuts",
   ];
 
   const customer1 = {
     id: 103,
     name: "Jordan Jordanson",
-    allergies: []
+    allergies: [],
   };
 
   it("Should include all allergens as safe if none present on the object allergies array", () => {
-    expect(setSafeAllergens(customer1, allergenList).safeAllergens).toStrictEqual([
+    expect(
+      setSafeAllergens(customer1, allergenList).safeAllergens
+    ).toStrictEqual([
       "celery",
       "gluten",
       "crustaceans",
@@ -200,7 +234,7 @@ xdescribe("setSafeAllergens() tests", () => {
       "sesame",
       "soybeans",
       "sulphites",
-      "tree nuts"
+      "tree nuts",
     ]);
   });
 
@@ -221,38 +255,65 @@ xdescribe("setSafeAllergens() tests", () => {
       "sesame",
       "soybeans",
       "sulphites",
-      "tree nuts"
-    ]
+      "tree nuts",
+    ],
   };
 
   it("Should include no allergens if all are found on the customer object", () => {
-    expect(setSafeAllergens(customer2, allergenList).safeAllergens).toStrictEqual([]);
+    expect(
+      setSafeAllergens(customer2, allergenList).safeAllergens
+    ).toStrictEqual([]);
   });
 
   const customer3 = {
     id: 105,
     name: "Mandy Manderson",
-    allergies: ["eggs", "fish", "lupin", "molluscs", "mustard", "sesame", "soybeans", "sulphites"]
+    allergies: [
+      "eggs",
+      "fish",
+      "lupin",
+      "molluscs",
+      "mustard",
+      "sesame",
+      "soybeans",
+      "sulphites",
+    ],
   };
 
   it("Should include some allergens if some are present on customer allergen list", () => {
-    expect(setSafeAllergens(customer3, allergenList).safeAllergens).toStrictEqual([
+    expect(
+      setSafeAllergens(customer3, allergenList).safeAllergens
+    ).toStrictEqual([
       "celery",
       "gluten",
       "crustaceans",
       "milk",
       "peanuts",
-      "tree nuts"
+      "tree nuts",
     ]);
   });
 });
 
-xdescribe("mergeFurniture() tests", () => {
+describe("mergeFurniture() tests", () => {
   const tableLocationInfo = { id: 101, location: "Bristol", sku: "bXpGsZC2j4" };
-  const tableProductInfo = { id: 101, name: "lack", price: 6, isAvailable: true };
+  const tableProductInfo = {
+    id: 101,
+    name: "lack",
+    price: 6,
+    isAvailable: true,
+  };
 
-  const cabinetLocationInfo = { id: 202, location: "Cardiff", sku: "6kX83aRVdn" };
-  const cabinetProductInfo = { id: 202, name: "bimnes", price: 55, isAvailable: false };
+  const cabinetLocationInfo = {
+    id: 202,
+    location: "Cardiff",
+    sku: "6kX83aRVdn",
+  };
+  const cabinetProductInfo = {
+    id: 202,
+    name: "bimnes",
+    price: 55,
+    isAvailable: false,
+  };
 
   it("Should return an object which has a combination of both keys", () => {
     const testFurniture = mergeFurniture(tableLocationInfo, tableProductInfo);
@@ -280,7 +341,7 @@ xdescribe("mergeFurniture() tests", () => {
       sku: "bXpGsZC2j4",
       name: "lack",
       price: 6,
-      isAvailable: true
+      isAvailable: true,
     });
 
     const testCabinet = mergeFurniture(cabinetLocationInfo, cabinetProductInfo);
@@ -290,7 +351,7 @@ xdescribe("mergeFurniture() tests", () => {
       sku: "6kX83aRVdn",
       name: "bimnes",
       price: 55,
-      isAvailable: false
+      isAvailable: false,
     });
   });
 });

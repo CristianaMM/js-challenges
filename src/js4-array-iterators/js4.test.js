@@ -20,20 +20,27 @@ const mixedBooleanArr = [true, false, false, true, false, true, true];
 const toBePercentages = [1, 0.5, 0.25, 0.4, 0.99, 0.1];
 const percentages = ["100%", "50%", "25%", "40%", "99%", "10%"];
 const possessions = ["Cabbage", "Turnip", "Radish", "Carrot"];
-const mattsPosessions = ["Matt's Cabbage", "Matt's Turnip", "Matt's Radish", "Matt's Carrot"];
+const mattsPosessions = [
+  "Matt's Cabbage",
+  "Matt's Turnip",
+  "Matt's Radish",
+  "Matt's Carrot",
+];
 const numbersCSV = "5+2+55+1990+45+15+22";
 const stringsToClean = ["  CaBBage  ", "TuRnIp", "  RADish", "CARroT  "];
 const cleanedStrings = "cabbage+turnip+radish+carrot";
 const formattedStringArr = ["T", "e", "S", "t", "S", "t", "R", "i", "N", "g"];
 
-xdescribe("Testing removeFalseValues()", () => {
+describe("Testing removeFalseValues()", () => {
   it("Should return an array", () => {
     expect(Array.isArray(removeFalseValues([true]))).toBe(true);
     expect(Array.isArray(removeFalseValues([false]))).toBe(true);
   });
 
   it("Should return an array of Booleans", () => {
-    const testForBooleans = removeFalseValues(mixedBooleanArr).every((bool) => typeof bool === "boolean");
+    const testForBooleans = removeFalseValues(mixedBooleanArr).every(
+      (bool) => typeof bool === "boolean"
+    );
     expect(testForBooleans).toBe(true);
   });
 
@@ -43,26 +50,35 @@ xdescribe("Testing removeFalseValues()", () => {
   });
 
   it("Should have the same amount of true values as the orginal array", () => {
-    expect(removeFalseValues(mixedBooleanArr)).toEqual([true, true, true, true]);
+    expect(removeFalseValues(mixedBooleanArr)).toEqual([
+      true,
+      true,
+      true,
+      true,
+    ]);
     expect(removeFalseValues(Array(5).fill(true)).length).toBe(5);
     expect(removeFalseValues(Array(60).fill(true)).length).toBe(60);
   });
 });
 
-xdescribe("Testing createPercentageList()", () => {
+describe("Testing createPercentageList()", () => {
   it("Should return an array", () => {
     expect(Array.isArray(createPercentageList(toBePercentages))).toBe(true);
   });
 
   it("Should return an array of Strings", () => {
-    const testForStrings = createPercentageList(toBePercentages).every((string) => typeof string === "string");
+    const testForStrings = createPercentageList(toBePercentages).every(
+      (string) => typeof string === "string"
+    );
     expect(testForStrings).toBe(true);
   });
 
   it("Should convert numbers into percentages", () => {
     expect(createPercentageList(toBePercentages)).toEqual(percentages);
     expect(createPercentageList([0.25])).toEqual(["25%"]);
-    expect(createPercentageList(Array(20).fill(1))).toEqual(Array(20).fill("100%"));
+    expect(createPercentageList(Array(20).fill(1))).toEqual(
+      Array(20).fill("100%")
+    );
   });
 
   it("Should match given array's length", () => {
@@ -70,52 +86,67 @@ xdescribe("Testing createPercentageList()", () => {
   });
 });
 
-xdescribe("Testing createListOfPoessessions()", () => {
+describe("Testing createListOfPoessessions()", () => {
   it("Should return an array", () => {
-    expect(Array.isArray(createListOfPoessessions(possessions, "Matt's"))).toBe(true);
+    expect(Array.isArray(createListOfPoessessions(possessions, "Matt's"))).toBe(
+      true
+    );
   });
 
   it("Should return an array of Strings", () => {
-    const testForStrings = createListOfPoessessions(possessions, "Matt's").every(
-      (string) => typeof string === "string"
-    );
+    const testForStrings = createListOfPoessessions(
+      possessions,
+      "Matt's"
+    ).every((string) => typeof string === "string");
     expect(testForStrings).toBe(true);
   });
 
   it("Should prefix name as expected", () => {
-    expect(createListOfPoessessions(possessions, "Matt's")).toEqual(mattsPosessions);
-    expect(createListOfPoessessions(["shoes", "jacket", "belt"], "disco")).toEqual([
-      "disco shoes",
-      "disco jacket",
-      "disco belt",
-    ]);
+    expect(createListOfPoessessions(possessions, "Matt's")).toEqual(
+      mattsPosessions
+    );
+    expect(
+      createListOfPoessessions(["shoes", "jacket", "belt"], "disco")
+    ).toEqual(["disco shoes", "disco jacket", "disco belt"]);
   });
 
   it("Should match given Array's length", () => {
     expect(createListOfPoessessions(possessions, "Matt's").length).toBe(4);
-    expect(createListOfPoessessions(Array(20).fill("A"), "disco").length).toBe(20);
+    expect(createListOfPoessessions(Array(20).fill("A"), "disco").length).toBe(
+      20
+    );
   });
 });
 
-xdescribe("Testing convertStringToNumbersArray()", () => {
+describe("Testing convertStringToNumbersArray()", () => {
   it("Should return an array", () => {
     expect(Array.isArray(convertStringToNumbersArray(numbersCSV))).toBe(true);
   });
 
   it("Should return an array of Numbers", () => {
-    const testForNumbers = convertStringToNumbersArray(numbersCSV).every((number) => typeof number === "number");
+    const testForNumbers = convertStringToNumbersArray(numbersCSV).every(
+      (number) => typeof number === "number"
+    );
     expect(testForNumbers).toBe(true);
   });
 
   it("Should convert string as expected", () => {
-    expect(convertStringToNumbersArray(numbersCSV)).toEqual([5, 2, 55, 1990, 45, 15, 22]);
+    expect(convertStringToNumbersArray(numbersCSV)).toEqual([
+      5, 2, 55, 1990, 45, 15, 22,
+    ]);
     expect(convertStringToNumbersArray("1+2")).toEqual([1, 2]);
-    expect(convertStringToNumbersArray(Array(10).fill("1").join("+"))).toEqual(Array(10).fill(1));
+    expect(convertStringToNumbersArray(Array(10).fill("1").join("+"))).toEqual(
+      Array(10).fill(1)
+    );
   });
 
   it("Should handle big inputs", () => {
-    expect(convertStringToNumbersArray(Array(100).fill("1").join("+"))).toEqual(Array(100).fill(1));
-    expect(convertStringToNumbersArray(Array(1000).fill("1").join("+")).length).toBe(1000);
+    expect(convertStringToNumbersArray(Array(100).fill("1").join("+"))).toEqual(
+      Array(100).fill(1)
+    );
+    expect(
+      convertStringToNumbersArray(Array(1000).fill("1").join("+")).length
+    ).toBe(1000);
   });
 
   it("Should handle single inputs", () => {
@@ -123,25 +154,41 @@ xdescribe("Testing convertStringToNumbersArray()", () => {
   });
 });
 
-xdescribe("Testing createOddEvenArray()", () => {
+describe("Testing createOddEvenArray()", () => {
   it("Should return an array", () => {
     expect(Array.isArray(createOddEvenArray(numbersCSV))).toBe(true);
   });
 
   it("Should return an array of Strings", () => {
-    const testForStrings = createOddEvenArray(numbersCSV).every((string) => typeof string === "string");
+    const testForStrings = createOddEvenArray(numbersCSV).every(
+      (string) => typeof string === "string"
+    );
     expect(testForStrings).toBe(true);
   });
 
   it("Should convert string as expected", () => {
-    expect(createOddEvenArray(numbersCSV)).toEqual(["odd", "even", "odd", "even", "odd", "odd", "even"]);
+    expect(createOddEvenArray(numbersCSV)).toEqual([
+      "odd",
+      "even",
+      "odd",
+      "even",
+      "odd",
+      "odd",
+      "even",
+    ]);
     expect(createOddEvenArray("1+2")).toEqual(["odd", "even"]);
-    expect(createOddEvenArray(Array(10).fill("1").join("+"))).toEqual(Array(10).fill("odd"));
+    expect(createOddEvenArray(Array(10).fill("1").join("+"))).toEqual(
+      Array(10).fill("odd")
+    );
   });
 
   it("Should handle big inputs", () => {
-    expect(createOddEvenArray(Array(100).fill("1").join("+"))).toEqual(Array(100).fill("odd"));
-    expect(createOddEvenArray(Array(1000).fill("1").join("+")).length).toBe(1000);
+    expect(createOddEvenArray(Array(100).fill("1").join("+"))).toEqual(
+      Array(100).fill("odd")
+    );
+    expect(createOddEvenArray(Array(1000).fill("1").join("+")).length).toBe(
+      1000
+    );
   });
 
   it("Should handle single inputs", () => {
@@ -149,46 +196,67 @@ xdescribe("Testing createOddEvenArray()", () => {
   });
 });
 
-xdescribe("Testing filterBooksBySearch()", () => {
+describe("Testing filterBooksBySearch()", () => {
   it("Should return an array", () => {
-    expect(Array.isArray(filterBooksBySearch(["one thing"], "one thing"))).toBe(true);
+    expect(Array.isArray(filterBooksBySearch(["one thing"], "one thing"))).toBe(
+      true
+    );
   });
 
   it("Should return an array of Strings", () => {
-    const testForStrings = filterBooksBySearch(["disco", "disco", "shoes", "disco shoe"], "disco").every(
-      (string) => typeof string === "string"
-    );
+    const testForStrings = filterBooksBySearch(
+      ["disco", "disco", "shoes", "disco shoe"],
+      "disco"
+    ).every((string) => typeof string === "string");
     expect(testForStrings).toBe(true);
   });
 
   it("Should handle one match", () => {
-    expect(filterBooksBySearch(["one thing"], "one thing")).toEqual(["one thing"]);
-    expect(filterBooksBySearch(["a", "aa", "bb", "aaa", "b"], "bb").length).toBe(1);
+    expect(filterBooksBySearch(["one thing"], "one thing")).toEqual([
+      "one thing",
+    ]);
+    expect(
+      filterBooksBySearch(["a", "aa", "bb", "aaa", "b"], "bb").length
+    ).toBe(1);
   });
 
   it("Should handle multiple matches", () => {
-    expect(filterBooksBySearch(["disco", "disco", "shoes", "disco shoe"], "disco").length).toBe(3);
-    expect(filterBooksBySearch(["disco", "disco", "shoes", "disco shoe"], "oe").length).toBe(2);
+    expect(
+      filterBooksBySearch(["disco", "disco", "shoes", "disco shoe"], "disco")
+        .length
+    ).toBe(3);
+    expect(
+      filterBooksBySearch(["disco", "disco", "shoes", "disco shoe"], "oe")
+        .length
+    ).toBe(2);
   });
 
   it("Should handle large matches", () => {
-    expect(filterBooksBySearch(Array(100).fill("disco"), "disco").length).toBe(100);
+    expect(filterBooksBySearch(Array(100).fill("disco"), "disco").length).toBe(
+      100
+    );
   });
 
   it("Should handle single character matches", () => {
-    expect(filterBooksBySearch(["a", "aa", "bb", "aaa", "b"], "a").length).toBe(3);
-    expect(filterBooksBySearch(["a", "aa", "bb", "aaa", "b"], "b").length).toBe(2);
+    expect(filterBooksBySearch(["a", "aa", "bb", "aaa", "b"], "a").length).toBe(
+      3
+    );
+    expect(filterBooksBySearch(["a", "aa", "bb", "aaa", "b"], "b").length).toBe(
+      2
+    );
   });
 
   it("Should handle no matches", () => {
-    expect(filterBooksBySearch(Array(100).fill("disco"), "techno").length).toBe(0);
+    expect(filterBooksBySearch(Array(100).fill("disco"), "techno").length).toBe(
+      0
+    );
     expect(filterBooksBySearch(["one thing"], "nothing")).toEqual([]);
     expect(filterBooksBySearch([], "nothing")).toEqual([]);
     expect(filterBooksBySearch([])).toEqual([]);
   });
 });
 
-xdescribe("Testing formatStringArray()", () => {
+describe("Testing formatStringArray()", () => {
   it("Should return a String", () => {
     expect(typeof formatStringArray(["  front"])).toBe("string");
   });
@@ -218,7 +286,7 @@ xdescribe("Testing formatStringArray()", () => {
   });
 });
 
-xdescribe("Testing formatString()", () => {
+describe("Testing formatString()", () => {
   it("Should NOT return undefined", () => {
     expect(formatString("  defined")).toBeDefined();
   });
@@ -228,7 +296,9 @@ xdescribe("Testing formatString()", () => {
   });
 
   it("Should return an array of Strings", () => {
-    const testForStrings = formatString("white  space").every((string) => typeof string === "string");
+    const testForStrings = formatString("white  space").every(
+      (string) => typeof string === "string"
+    );
     expect(testForStrings).toBe(true);
   });
 
@@ -238,7 +308,9 @@ xdescribe("Testing formatString()", () => {
   });
 
   it("Should remove punctuation", () => {
-    expect(formatString("punctuation!\"£$%^&*()?[]{}|,./;'@~#+=").length).toBe(11);
+    expect(formatString("punctuation!\"£$%^&*()?[]{}|,./;'@~#+=").length).toBe(
+      11
+    );
     expect(formatString('!"£$%^&').length).toBe(0);
   });
 
@@ -259,7 +331,9 @@ xdescribe("Testing formatString()", () => {
 
   it("Should format string as expected", () => {
     expect(formatString("test string")).toEqual(formattedStringArr);
-    expect(formatString('898    te%^$£"&*()st str3552621ing')).toEqual(formattedStringArr);
+    expect(formatString('898    te%^$£"&*()st str3552621ing')).toEqual(
+      formattedStringArr
+    );
   });
 
   it("Should handle empty input", () => {
@@ -276,7 +350,8 @@ describe("Testing fizzBuzz()", () => {
     .fill(0)
     .map((_, index) => `${index + 1}`);
 
-  const firstFifteenArray = "1-2-Fizz-4-Buzz-Fizz-7-8-Fizz-Buzz-11-Fizz-13-14-FizzBuzz".split("-");
+  const firstFifteenArray =
+    "1-2-Fizz-4-Buzz-Fizz-7-8-Fizz-Buzz-11-Fizz-13-14-FizzBuzz".split("-");
 
   const mixedArray = [-1, 5, 6, "disco", 0, 0, 7, "5", 45];
 
@@ -289,7 +364,9 @@ describe("Testing fizzBuzz()", () => {
   });
 
   it("Should return an array of Strings", () => {
-    const testForStrings = fizzBuzz(cleanArray).every((string) => typeof string === "string");
+    const testForStrings = fizzBuzz(cleanArray).every(
+      (string) => typeof string === "string"
+    );
     expect(testForStrings).toBe(true);
   });
 
@@ -322,7 +399,9 @@ describe("Testing fizzBuzz()", () => {
   });
 
   it("Should have the correct amount of FizzBuzz", () => {
-    const FizzBuzzMatch = fizzBuzz(cleanArray).filter((el) => el === "FizzBuzz");
+    const FizzBuzzMatch = fizzBuzz(cleanArray).filter(
+      (el) => el === "FizzBuzz"
+    );
 
     expect(FizzBuzzMatch.length).toBe(3);
   });
@@ -348,7 +427,13 @@ describe("Testing fizzBuzz()", () => {
   });
 
   it("Should fizzBuzz a mixed input as expected", () => {
-    expect(fizzBuzz(mixedArray)).toEqual(["Buzz", "Fizz", "7", "Buzz", "FizzBuzz"]);
+    expect(fizzBuzz(mixedArray)).toEqual([
+      "Buzz",
+      "Fizz",
+      "7",
+      "Buzz",
+      "FizzBuzz",
+    ]);
   });
 
   it("Should alter the length of a mixed input", () => {

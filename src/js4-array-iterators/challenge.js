@@ -13,6 +13,10 @@
  * Foundation Challenges
  */
 
+// MAP -> NEW ARRAY - > FUNCTION APPLIED TO EACH ITEM IN THE ARRAY
+// FILTER _> NEW ARRAY -> EACH ITEM HAS TO PASS A CONDITION
+// FOREACH -> READ ONLY _> GIVE YOU ACESS TO EACH ITEM IN THE ARRAY
+
 /**
  * A function that takes an array of Booleans and then removes the false values from the given array.
  * It should create a new array only consiting of the true values.
@@ -22,7 +26,10 @@
  */
 
 export const removeFalseValues = (booleanArr) => {
-  return;
+  const trueValues = booleanArr.filter((boolean) => {
+    return boolean === true;
+  });
+  return trueValues;
 };
 
 /**
@@ -34,7 +41,10 @@ export const removeFalseValues = (booleanArr) => {
  */
 
 export const createPercentageList = (numbersArr) => {
-  return;
+  const percentageArray = numbersArr.map((value) => {
+    return value * 100 + "%";
+  });
+  return percentageArray;
 };
 
 /**
@@ -47,7 +57,10 @@ export const createPercentageList = (numbersArr) => {
  */
 
 export const createListOfPoessessions = (possessionsArr, name) => {
-  return;
+  const result = possessionsArr.map((possession) => {
+    return name + " " + possession;
+  });
+  return result;
 };
 
 /**
@@ -72,7 +85,10 @@ export const createListOfPoessessions = (possessionsArr, name) => {
  */
 
 export const convertStringToNumbersArray = (numberString) => {
-  return;
+  const arrayOfNumbers = numberString.split("+").map((string) => {
+    return parseFloat(string);
+  });
+  return arrayOfNumbers;
 };
 
 /**
@@ -84,7 +100,14 @@ export const convertStringToNumbersArray = (numberString) => {
  */
 
 export const createOddEvenArray = (numberString) => {
-  return;
+  const newArray = numberString.split("+").map((value) => {
+    if (Number(value) % 2 === 0) {
+      return "even";
+    } else {
+      return "odd";
+    }
+  });
+  return newArray;
 };
 
 /**
@@ -97,7 +120,10 @@ export const createOddEvenArray = (numberString) => {
  */
 
 export const filterBooksBySearch = (booksArr, searchTerm) => {
-  return;
+  const filteredBooks = booksArr.filter((book) => {
+    return book.includes(searchTerm);
+  });
+  return filteredBooks;
 };
 
 /**
@@ -117,7 +143,7 @@ export const filterBooksBySearch = (booksArr, searchTerm) => {
  */
 
 export const formatStringArray = (stringArr) => {
-  const cleanedArr = stringArr.forEach((string) => {
+  const cleanedArr = stringArr.map((string) => {
     const cleanStr = string.trim().toLowerCase();
     return cleanStr;
   });
@@ -143,7 +169,18 @@ export const formatStringArray = (stringArr) => {
  */
 
 export const formatString = (string) => {
-  return;
+  const letters = /[a-zA-Z]+/g;
+  const cleanedArray = (string.match(letters) || []).join("").split("");
+
+  for (let i = 0; i < cleanedArray.length; i++) {
+    if (i % 2 === 0) {
+      cleanedArray[i] = cleanedArray[i].toUpperCase();
+    } else {
+      cleanedArray[i] = cleanedArray[i].toLowerCase();
+    }
+  }
+
+  return cleanedArray;
 };
 
 /**
@@ -170,5 +207,20 @@ export const formatString = (string) => {
  */
 
 export const fizzBuzz = (mixedArray) => {
-  return;
+  return mixedArray
+    .map((element) => parseInt(element))
+    .filter((num) => num > 0)
+    .map((num) => {
+      let result = "";
+      if (num % 3 === 0 && num % 5 === 0) {
+        result = "FizzBuzz";
+      } else if (num % 3 === 0) {
+        result = "Fizz";
+      } else if (num % 5 === 0) {
+        result = "Buzz";
+      } else {
+        result = num.toString();
+      }
+      return result;
+    });
 };

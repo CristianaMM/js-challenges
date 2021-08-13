@@ -1,6 +1,15 @@
 import * as challenge from "./challenge";
 
-const { Coordinate, Alert, Loader, Counter, Engine, Modal, BookShelf, BankAccount } = challenge;
+const {
+  Coordinate,
+  Alert,
+  Loader,
+  Counter,
+  Engine,
+  Modal,
+  BookShelf,
+  BankAccount,
+} = challenge;
 
 /**
  * REMOVE X FROM xdescribe FUNCTION TO STOP SKIPPING TEST BLOCKS
@@ -36,9 +45,11 @@ describe("Testing Coordinate class", () => {
   });
 });
 
-xdescribe("Testing Alert class", () => {
+describe("Testing Alert class", () => {
   const logOutAlert = new Alert("Are you sure you want to log out?");
-  const deleteAlert = new Alert("Are you sure you want to delete this content?");
+  const deleteAlert = new Alert(
+    "Are you sure you want to delete this content?"
+  );
 
   it("Should be an object", () => {
     expect(typeof logOutAlert).toBe("object");
@@ -62,7 +73,8 @@ xdescribe("Testing Alert class", () => {
 
   it("Should return a correctly formatted string when the printMessage method is called", () => {
     const logOutMessage = "!!!! Are you sure you want to log out? !!!!";
-    const deleteMessage = "!!!! Are you sure you want to delete this content? !!!!";
+    const deleteMessage =
+      "!!!! Are you sure you want to delete this content? !!!!";
 
     expect(logOutAlert.printMessage()).toBe(logOutMessage);
     expect(deleteAlert.printMessage()).toBe(deleteMessage);
@@ -72,11 +84,13 @@ xdescribe("Testing Alert class", () => {
     logOutAlert.printMessage();
     deleteAlert.printMessage();
     expect(logOutAlert.message).toBe("Are you sure you want to log out?");
-    expect(deleteAlert.message).toBe("Are you sure you want to delete this content?");
+    expect(deleteAlert.message).toBe(
+      "Are you sure you want to delete this content?"
+    );
   });
 });
 
-xdescribe("Testing Loader class", () => {
+describe("Testing Loader class", () => {
   const htmlReference = { innerHTML: "" };
   const loader = new Loader(htmlReference);
 
@@ -118,7 +132,7 @@ xdescribe("Testing Loader class", () => {
   });
 });
 
-xdescribe("Testing Counter class", () => {
+describe("Testing Counter class", () => {
   let lowCount, highCount, noCount;
 
   beforeEach(() => {
@@ -220,7 +234,7 @@ xdescribe("Testing Counter class", () => {
   });
 });
 
-xdescribe("Testing Engine class", () => {
+describe("Testing Engine class", () => {
   let engine;
 
   beforeEach(() => {
@@ -285,7 +299,7 @@ xdescribe("Testing Engine class", () => {
   });
 });
 
-xdescribe("Testing Modal class", () => {
+describe("Testing Modal class", () => {
   let modal;
 
   let htmlReference;
@@ -301,10 +315,14 @@ xdescribe("Testing Modal class", () => {
           } else {
             this.list.push(cssClass);
           }
-        }
-      }
+        },
+      },
     };
-    modal = new Modal(htmlReference, "Error", "Sorry there has been some sort of error");
+    modal = new Modal(
+      htmlReference,
+      "Error",
+      "Sorry there has been some sort of error"
+    );
   });
 
   it("Should be an object", () => {
@@ -374,13 +392,13 @@ xdescribe("Testing Modal class", () => {
   });
 });
 
-xdescribe("Testing BookShelf class", () => {
+describe("Testing BookShelf class", () => {
   let bookShelf;
   const bookArray = [
     "JavaScript: The Definitive Guide",
     "JavaScript: The Good Parts",
     "The Google story",
-    "React for Dummies"
+    "React for Dummies",
   ];
 
   const newBookArray = bookArray.filter((book) => book.includes("JavaScript"));
@@ -460,11 +478,15 @@ xdescribe("Testing BookShelf class", () => {
   });
 });
 
-xdescribe("Testing BankAccount class", () => {
+describe("Testing BankAccount class", () => {
   let bankAccount;
 
   beforeEach(() => {
-    bankAccount = new BankAccount("matthew bickel", "spellcaster2003@gmail.com", 500);
+    bankAccount = new BankAccount(
+      "matthew bickel",
+      "spellcaster2003@gmail.com",
+      500
+    );
   });
 
   it("Should be an object", () => {
@@ -490,7 +512,10 @@ xdescribe("Testing BankAccount class", () => {
   });
 
   it("Should set _balance key to 0 by default", () => {
-    bankAccount = new BankAccount("matthew bickel", "spellcaster2003@gmail.com");
+    bankAccount = new BankAccount(
+      "matthew bickel",
+      "spellcaster2003@gmail.com"
+    );
     expect(bankAccount._balance).toEqual(0);
   });
 
@@ -503,7 +528,11 @@ xdescribe("Testing BankAccount class", () => {
   });
 
   it("Should return a new _balance written as a getter", () => {
-    bankAccount = new BankAccount("matthew bickel", "spellcaster2003@gmail.com", 52344);
+    bankAccount = new BankAccount(
+      "matthew bickel",
+      "spellcaster2003@gmail.com",
+      52344
+    );
     expect(bankAccount.balance).toBe(52344);
   });
 
@@ -524,9 +553,13 @@ xdescribe("Testing BankAccount class", () => {
   });
 
   it("Should NOT be able to make a INVALID deposit should recieve formatted string when deposit() is called", () => {
-    expect(bankAccount.deposit("pony")).toBe("Invalid input, unable to deposit");
+    expect(bankAccount.deposit("pony")).toBe(
+      "Invalid input, unable to deposit"
+    );
     expect(bankAccount.deposit(-100)).toBe("Invalid input, unable to deposit");
-    expect(bankAccount.deposit("-100")).toBe("Invalid input, unable to deposit");
+    expect(bankAccount.deposit("-100")).toBe(
+      "Invalid input, unable to deposit"
+    );
   });
 
   it("Should be able to make a valid deposit (number) and check the balance afterwards", () => {
@@ -535,7 +568,26 @@ xdescribe("Testing BankAccount class", () => {
   });
 
   it("Should be able to make multiple deposits and check the balance afterwards", () => {
-    const toDeposit = [20, "50", "-2", 2, "0.5", 0.5, [], 15, 4, -50, "disco", 2, "1", "0.5", 0.25, 0.25, 3, 1];
+    const toDeposit = [
+      20,
+      "50",
+      "-2",
+      2,
+      "0.5",
+      0.5,
+      [],
+      15,
+      4,
+      -50,
+      "disco",
+      2,
+      "1",
+      "0.5",
+      0.25,
+      0.25,
+      3,
+      1,
+    ];
     toDeposit.forEach((number) => {
       bankAccount.deposit(number);
     });
@@ -560,13 +612,21 @@ xdescribe("Testing BankAccount class", () => {
   });
 
   it("Should NOT be able to make a INVALID withdrawal should recieve formatted string", () => {
-    expect(bankAccount.withdraw("gardener")).toBe("Invalid input, unable to withdraw");
-    expect(bankAccount.withdraw("-40")).toBe("Invalid input, unable to withdraw");
-    expect(bankAccount.withdraw(-890)).toBe("Invalid input, unable to withdraw");
+    expect(bankAccount.withdraw("gardener")).toBe(
+      "Invalid input, unable to withdraw"
+    );
+    expect(bankAccount.withdraw("-40")).toBe(
+      "Invalid input, unable to withdraw"
+    );
+    expect(bankAccount.withdraw(-890)).toBe(
+      "Invalid input, unable to withdraw"
+    );
   });
 
   it("Should NOT be able to make withdraw more then the current balance", () => {
-    expect(bankAccount.withdraw(1000)).toBe("Insufficient funds, unable to withdraw");
+    expect(bankAccount.withdraw(1000)).toBe(
+      "Insufficient funds, unable to withdraw"
+    );
   });
 
   it("Should NOT change the balance after INVALID withdrawals", () => {
@@ -583,7 +643,26 @@ xdescribe("Testing BankAccount class", () => {
   });
 
   it("Should be able to make multiple withdrawals and check the balance afterwards", () => {
-    const toWithdraw = [20, "50", 2, "0.5", -22, 0.5, 15, 500, 4, "disco", 2, "1", "0.5", 0.25, 0.25, 3, 1, 1000];
+    const toWithdraw = [
+      20,
+      "50",
+      2,
+      "0.5",
+      -22,
+      0.5,
+      15,
+      500,
+      4,
+      "disco",
+      2,
+      "1",
+      "0.5",
+      0.25,
+      0.25,
+      3,
+      1,
+      1000,
+    ];
     toWithdraw.forEach((number) => {
       bankAccount.withdraw(number);
     });

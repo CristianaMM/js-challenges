@@ -30,7 +30,7 @@ describe("Testing totalScoresArr()", () => {
   });
 });
 
-xdescribe("Testing reverseString()", () => {
+describe("Testing reverseString()", () => {
   it("Should return a String", () => {
     expect(typeof reverseString("coconut")).toBe("string");
     expect(typeof reverseString("test")).toBe("string");
@@ -50,40 +50,62 @@ xdescribe("Testing reverseString()", () => {
     expect(reverseString("coconut")).toBe("tunococ");
     expect(reverseString("test")).toBe("tset");
   });
-
 });
 
-xdescribe("Testing sortCharactersAlphabetically()", () => {
+describe("Testing sortCharactersAlphabetically()", () => {
   const lowerCaseCharArr = "dloejmixwrsnfacqyukvhtgzpb".split("");
   const upperCaseCharArr = "DLOEJMIXWRSNFACQYUKVHTGZPB".split("");
   const sortedCharArr = "abcdefghijklmnopqrstuvwxyz".split("");
   const mixedCaseArr = [...lowerCaseCharArr, ...upperCaseCharArr];
-  const sortedMixedCaseArr = "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz".split("");
+  const sortedMixedCaseArr =
+    "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz".split("");
 
   it("Should return an Array", () => {
-    expect(Array.isArray(sortCharactersAlphabetically(lowerCaseCharArr))).toBeTruthy();
+    expect(
+      Array.isArray(sortCharactersAlphabetically(lowerCaseCharArr))
+    ).toBeTruthy();
     expect(Array.isArray(sortCharactersAlphabetically(["Test"]))).toBeTruthy();
   });
 
   it("Should return an Array of Strings", () => {
-    const stringTest = sortCharactersAlphabetically(lowerCaseCharArr).every((char) => typeof char === "string");
+    const stringTest = sortCharactersAlphabetically(lowerCaseCharArr).every(
+      (char) => typeof char === "string"
+    );
     expect(stringTest).toBeTruthy();
   });
 
   it("Should sort lowercase letters alphabetically", () => {
-    expect(sortCharactersAlphabetically(lowerCaseCharArr)).toEqual(sortedCharArr);
+    expect(sortCharactersAlphabetically(lowerCaseCharArr)).toEqual(
+      sortedCharArr
+    );
     expect(sortCharactersAlphabetically(sortedCharArr)).toEqual(sortedCharArr);
-    expect(sortCharactersAlphabetically(["c", "b", "a"])).toEqual(["a", "b", "c"]);
+    expect(sortCharactersAlphabetically(["c", "b", "a"])).toEqual([
+      "a",
+      "b",
+      "c",
+    ]);
   });
 
   it("Should sort uppercase letters alphabetically", () => {
-    expect(sortCharactersAlphabetically(upperCaseCharArr)).toEqual(sortedCharArr);
-    expect(sortCharactersAlphabetically(["C", "B", "B"])).toEqual(["b", "b", "c"]);
+    expect(sortCharactersAlphabetically(upperCaseCharArr)).toEqual(
+      sortedCharArr
+    );
+    expect(sortCharactersAlphabetically(["C", "B", "B"])).toEqual([
+      "b",
+      "b",
+      "c",
+    ]);
   });
 
   it("Should sort Uppercase and lowercase characters", () => {
-    expect(sortCharactersAlphabetically(mixedCaseArr)).toEqual(sortedMixedCaseArr);
-    expect(sortCharactersAlphabetically(["A", "b", "C"])).toEqual(["a", "b", "c"]);
+    expect(sortCharactersAlphabetically(mixedCaseArr)).toEqual(
+      sortedMixedCaseArr
+    );
+    expect(sortCharactersAlphabetically(["A", "b", "C"])).toEqual([
+      "a",
+      "b",
+      "c",
+    ]);
   });
 
   it("Should be the same length as the input", () => {
@@ -91,10 +113,9 @@ xdescribe("Testing sortCharactersAlphabetically()", () => {
     expect(sortCharactersAlphabetically(mixedCaseArr).length).toBe(52);
     expect(sortCharactersAlphabetically(["a", "a", "a"]).length).toBe(3);
   });
-
 });
 
-xdescribe("Testing sortNumbersHighToLow()", () => {
+describe("Testing sortNumbersHighToLow()", () => {
   const lowToHigh = Array(50)
     .fill(1)
     .map((number, index) => (number += index));
@@ -107,7 +128,9 @@ xdescribe("Testing sortNumbersHighToLow()", () => {
   });
 
   it("Should return an Array of Numbers", () => {
-    const numberTest = sortNumbersHighToLow(lowToHigh).every((number) => typeof number === "number");
+    const numberTest = sortNumbersHighToLow(lowToHigh).every(
+      (number) => typeof number === "number"
+    );
     expect(numberTest).toBeTruthy();
   });
 
@@ -130,10 +153,9 @@ xdescribe("Testing sortNumbersHighToLow()", () => {
     expect(sortNumbersHighToLow(lowToHigh).length).toBe(50);
     expect(sortNumbersHighToLow([40, 7, 20, 53]).length).toBe(4);
   });
-
 });
 
-xdescribe("Testing checkItemInstock()", () => {
+describe("Testing checkItemInstock()", () => {
   const stockList = [
     "apple",
     "banana",
@@ -148,7 +170,8 @@ xdescribe("Testing checkItemInstock()", () => {
     "melon",
   ];
 
-  const expectedMatchMessage = (item, index) => `${item} is instock, it is on aisle ${index}.`;
+  const expectedMatchMessage = (item, index) =>
+    `${item} is instock, it is on aisle ${index}.`;
   const expectedNoMatchMessage = (item) => `Sorry ${item} is not instock.`;
 
   it("Should return a String", () => {
@@ -168,14 +191,23 @@ xdescribe("Testing checkItemInstock()", () => {
 
   it("Should handle every item in the stock list", () => {
     const checkAllStock = stockList.every(
-      (item, index) => checkItemInstock(item) === expectedMatchMessage(item, index)
+      (item, index) =>
+        checkItemInstock(item) === expectedMatchMessage(item, index)
     );
     expect(checkAllStock).toBe(true);
   });
 });
 
-xdescribe("Testing checkPrimaryColours()", () => {
-  const rainbowColours = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+describe("Testing checkPrimaryColours()", () => {
+  const rainbowColours = [
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "indigo",
+    "violet",
+  ];
   const primaryColours = ["red", "yellow", "blue"];
 
   it("Should return a Boolean", () => {
@@ -197,10 +229,9 @@ xdescribe("Testing checkPrimaryColours()", () => {
     expect(checkPrimaryColours(Array(100).fill("red"))).toBe(true);
     expect(checkPrimaryColours(Array(5000).fill("brown"))).toBe(false);
   });
-
 });
 
-xdescribe("Testing checkStringPalindrome()", () => {
+describe("Testing checkStringPalindrome()", () => {
   it("Should return a Boolean", () => {
     expect(typeof checkStringPalindrome("red", "green")).toBe("boolean");
     expect(typeof checkStringPalindrome("green", "green")).toBe("boolean");
@@ -231,7 +262,7 @@ xdescribe("Testing checkStringPalindrome()", () => {
   });
 });
 
-xdescribe("Testing totalNestedScoresArr()", () => {
+describe("Testing totalNestedScoresArr()", () => {
   const nestedScoreArr = [
     [3, 2, 1],
     [45, 6, 2],
@@ -246,7 +277,9 @@ xdescribe("Testing totalNestedScoresArr()", () => {
   });
 
   it("Should return array of numbers ", () => {
-    const numberTest = totalNestedScoresArr(nestedScoreArr).every((number) => typeof number === "number");
+    const numberTest = totalNestedScoresArr(nestedScoreArr).every(
+      (number) => typeof number === "number"
+    );
     expect(numberTest).toBe(true);
   });
 
@@ -265,7 +298,7 @@ xdescribe("Testing totalNestedScoresArr()", () => {
   });
 });
 
-xdescribe("Testing encryptString()", () => {
+describe("Testing encryptString()", () => {
   it("Should return a string", () => {
     expect(typeof encryptString("defined")).toBe("string");
     expect(typeof encryptString("disco flex")).toBe("string");
@@ -283,8 +316,12 @@ xdescribe("Testing encryptString()", () => {
   });
 
   it("Should encrypt large words", () => {
-    expect(encryptString("antidisestablishmentarianism")).toBe("aistlhnrnmndeaimtiitisbseaas");
-    expect(encryptString("hippopotomonstrosesquippedaliophobia")).toBe("hpomsosielpbiototsqpdihipponreupaooa");
+    expect(encryptString("antidisestablishmentarianism")).toBe(
+      "aistlhnrnmndeaimtiitisbseaas"
+    );
+    expect(encryptString("hippopotomonstrosesquippedaliophobia")).toBe(
+      "hpomsosielpbiototsqpdihipponreupaooa"
+    );
   });
 
   it("Should keep spaces between words", () => {
