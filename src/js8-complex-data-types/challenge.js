@@ -17,7 +17,9 @@
  * @returns {string[]} A list of the employees quotes for the website
  */
 export const getEmployeeQuotes = (employeeArr) => {
-  // Write code here
+  return employeeArr.map((employee) => {
+    return employee.quote;
+  });
 };
 
 /**
@@ -27,7 +29,9 @@ export const getEmployeeQuotes = (employeeArr) => {
  * @returns {{name: string, quote: string, yearsEmployed: number, isManagement: boolean}[]} An array containing only managers
  */
 export const getTheManagers = (employeeArr) => {
-  // Write code here
+  return employeeArr.filter((employee) => {
+    return employee.isManagement === true;
+  });
 };
 
 /**
@@ -37,7 +41,9 @@ export const getTheManagers = (employeeArr) => {
  * @returns {number} The number of the keys on the object
  */
 export const getNumberOfKeys = (object) => {
-  // Write code here
+  const keysArray = Object.keys(object);
+
+  return keysArray.length;
 };
 
 /* Intermediate Challenges */
@@ -50,7 +56,14 @@ export const getNumberOfKeys = (object) => {
  * @returns {{name: string, price: number, hasFreeShipping: boolean, quantity: number}} The most expensive item in the shopping basket
  */
 export const findMostExpensiveItem = (shoppingBasketArr) => {
-  // Write code here
+  let moreExpensive = shoppingBasketArr[0];
+
+  for (let i = 1; i < shoppingBasketArr.length; i++) {
+    if (shoppingBasketArr[i].price > moreExpensive.price) {
+      moreExpensive = shoppingBasketArr[i];
+    }
+  }
+  return moreExpensive;
 };
 
 /**
@@ -69,7 +82,10 @@ export const findMostExpensiveItem = (shoppingBasketArr) => {
  * @returns {{name: string, price: number, hasFreeShipping: boolean, quantity: number, totalPrice: number}[]} A new array where each object has had a total price added to it
  */
 export const settotalPrice = (shoppingBasketArr) => {
-  // Write code here
+  return shoppingBasketArr.map((item) => {
+    const price = item.price * item.quantity;
+    return { ...item, totalPrice: price };
+  });
 };
 
 /**
@@ -79,7 +95,9 @@ export const settotalPrice = (shoppingBasketArr) => {
  * @returns {number} The total cost of the order
  */
 export const totalShoppingBasket = (shoppingBasketArr) => {
-  // Write code here
+  return shoppingBasketArr.reduce((accumulator, currentItem) => {
+    return accumulator + currentItem.price * currentItem.quantity;
+  }, 0);
 };
 
 /* Advanced Challenges */
@@ -92,7 +110,14 @@ export const totalShoppingBasket = (shoppingBasketArr) => {
  * @returns {{id: number, name: string, ingredients: string[], country: string}[]} An array of cleaned meal objects
  */
 export const getImportantKeys = (mealsArr) => {
-  // Write code here
+  return mealsArr.map((meal) => {
+    return {
+      id: meal.id,
+      name: meal.name,
+      ingredients: meal.ingredients,
+      country: meal.country,
+    };
+  });
 };
 
 /**
@@ -106,7 +131,16 @@ export const getImportantKeys = (mealsArr) => {
  * @returns {{id: number, name: string, ingredients: string[], country: string, isVegetarian: boolean, timeToCook: number}[]}
  */
 export const setImportantKeys = (mealsArr) => {
-  // Write code here
+  return mealsArr.map((meal) => {
+    const newObject = { ...meal };
+    if (!Object.keys(newObject).includes("isVegetarian")) {
+      newObject.isVegetarian = false;
+    }
+    if (!Object.keys(newObject).includes("timeToCook")) {
+      newObject.timeToCook = 15;
+    }
+    return newObject;
+  });
 };
 
 /* Expert Challenge */
@@ -138,5 +172,27 @@ export const setImportantKeys = (mealsArr) => {
  * }[]} A Cleaned array of cocktail data
  */
 export const cleanCocktailResponseData = (cocktailData) => {
-  // Write code here
+  return cocktailData.map((drink) => {
+    let ingredientList = [];
+    const ingredientKeys = Object.keys(drink).filter((key) =>
+      key.includes("Ingredient")
+    );
+
+    for (let i = 0; i < ingredientKeys.length; i++) {
+      const key = ingredientKeys[i];
+      let ingredient = drink[key];
+
+      if (ingredient !== null) {
+        ingredientList.push(ingredient);
+      }
+    }
+    return {
+      id: drink.idDrink,
+      drink: drink.strDrink,
+      category: drink.strCategory,
+      alcoholic: drink.strAlcoholic,
+      instructions: drink.strInstructions,
+      ingredients: ingredientList,
+    };
+  });
 };
