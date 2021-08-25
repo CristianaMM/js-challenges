@@ -17,13 +17,26 @@ test("Should return string based on which number is larger", () => {
 });
 
 test("Should return new array of names based on length", () => {
-  expect(challenge.filterByLength(["Paul", "Calum", "Rebecca"])).toMatchObject(["Paul", "Calum"]);
-  expect(challenge.filterByLength(["Johnathan", "Sylvester", "Charlie"])).toBe("Sorry, no valid names supplied");
-  expect(challenge.filterByLength(["Tom", "Dick", "Harry"])).toMatchObject(["Tom", "Dick", "Harry"]);
+  expect(challenge.filterByLength(["Paul", "Calum", "Rebecca"])).toMatchObject([
+    "Paul",
+    "Calum",
+  ]);
+  expect(challenge.filterByLength(["Johnathan", "Sylvester", "Charlie"])).toBe(
+    "Sorry, no valid names supplied"
+  );
+  expect(challenge.filterByLength(["Tom", "Dick", "Harry"])).toMatchObject([
+    "Tom",
+    "Dick",
+    "Harry",
+  ]);
 });
 
 test("Should reduce all numbers correctly", () => {
-  expect(challenge.reduceNumbers([255, 230, 30], 10)).toMatchObject([245, 220, 20]);
+  expect(challenge.reduceNumbers([255, 230, 30], 10)).toMatchObject([
+    245, 220, 20,
+  ]);
   expect(challenge.reduceNumbers([40, 30, 20], 50)).toMatchObject([0, 0, 0]);
-  expect(challenge.reduceNumbers([300, 310, 320], 40)).toMatchObject([255, 255, 255]);
+  expect(challenge.reduceNumbers([300, 310, 320], 40)).toMatchObject([
+    255, 255, 255,
+  ]);
 });
