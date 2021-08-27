@@ -17,8 +17,10 @@
  * @param {string} url - The url of the API to fetch from
  * @returns {{id: string, name: string, age: number, height: number, interests: string[], isEmployed: boolean}[]} The data from the API
  */
- export const getData = (url) => {
-  // Your code here
+export const getData = (url) => {
+  return fetch(url)
+    .then((res) => res.json())
+    .then((json) => json);
 };
 
 /**
@@ -28,7 +30,9 @@
  * @returns {string[]} The list of names from the API
  */
 export const getNames = (url) => {
-  // Your code here
+  return fetch(url)
+    .then((res) => res.json())
+    .then((json) => json.map((item) => item.name));
 };
 
 /**
@@ -38,7 +42,9 @@ export const getNames = (url) => {
  * @return {{id: string, name: string, age: number, height: number, interests: string[], isEmployed: boolean}[]} The employed people from the API
  */
 export const getEmployedPeople = (url) => {
-  // Your code here
+  return fetch(url)
+    .then((res) => res.json())
+    .then((json) => json.filter((item) => item.isEmployed));
 };
 
 /* Intermediate Challenges */
@@ -52,7 +58,12 @@ export const getEmployedPeople = (url) => {
  * @returns {{id: string, name: string, age: number, height: number, interests: string[], isEmployed: boolean} | string} A person object OR A string saying "Person not found"
  */
 export const findPersonWithId = (url, id) => {
-  // Your code here
+  return fetch(url)
+    .then((res) => res.json())
+    .then((json) => {
+      const person = json.filter((person) => person.id === id);
+      return person[0] ? person[0] : "Person not found";
+    });
 };
 
 /**
@@ -64,7 +75,16 @@ export const findPersonWithId = (url, id) => {
  * @returns {{id: string, name: string, age: number, height: number, interests: string[], isEmployed: boolean}[] | string} A group of person objects OR A string saying "No people with interest found"
  */
 export const getPeopleWithMatchingInterests = (url, interest) => {
-  // Your code here
+  return fetch(url)
+    .then((res) => res.json())
+    .then((json) => {
+      const filteredArray = json.filter((person) =>
+        person.interests.includes(interest)
+      );
+      return filteredArray.length > 0
+        ? filteredArray
+        : "No people with interest found";
+    });
 };
 
 /* Advanced Challenges */
@@ -102,7 +122,24 @@ export const getPeopleWithMatchingInterests = (url, interest) => {
  * @returns {{id: string, name: string, age: number, height: number, interests: string[], isEmployed: boolean, decscription: string}[]} A group of person objects with added description key
  */
 export const setDescriptions = (url) => {
-  // Your code here
+  return fetch(url)
+    .then((res) => res.json())
+    .then((json) => {
+      return json.map((person) => {
+        const interests = [...person.interests];
+        const lastInterest = interests.pop();
+        const interestsString = interests.join(", ") + ` and ${lastInterest}`;
+
+        const employmentString = person.isEmployed
+          ? "I am currently employed"
+          : "I am not currently employed";
+
+        return {
+          ...person,
+          description: `My name is ${person.name}, I am ${person.age} years old and ${person.height}cm tall. I enjoy ${interestsString}. ${employmentString}`,
+        };
+      });
+    });
 };
 
 /* Expert Challenges */
@@ -152,5 +189,27 @@ export const setDescriptions = (url) => {
  * }[]}
  */
 export const setInterestDetails = (peopleUrl, interestsUrl) => {
-  // Your code here
+  return fetch(peopleUrl)
+    .then((res) => res.json())
+    .then((dataP) => {
+      let peopleData = [...dataP];
+
+      return fetch(interestsUrl)
+        .then((res) => res.json())
+        .then((dataI) => {
+          const interestsData = [...dataI];
+          peopleData = peopleData.map((person) => {
+            const interests = person.interests.map((interest) => {
+              return interestsData.filter(
+                (data) => data.interest === interest
+              )[0];
+            });
+            return {
+              ...person,
+              interests,
+            };
+          });
+          return peopleData;
+        });
+    });
 };

@@ -8,13 +8,13 @@ const {
   findPersonWithId,
   getPeopleWithMatchingInterests,
   setDescriptions,
-  setInterestDetails
+  setInterestDetails,
 } = challenge;
 
 beforeEach(() => {
   const mockFetch = jest.fn().mockImplementation((args) =>
     Promise.resolve({
-      json: () => require(args)
+      json: () => require(args),
     })
   );
 
@@ -42,7 +42,15 @@ describe("getNames() tests", () => {
   it("Should return an array of names", async () => {
     const namesArr = await getNames("./mockPersonApi.json");
     expect(Array.isArray(namesArr)).toBe(true);
-    expect(namesArr).toStrictEqual(["Peter", "Georgia", "Joanna", "Buzz", "Travis", "Paula", "J"]);
+    expect(namesArr).toStrictEqual([
+      "Peter",
+      "Georgia",
+      "Joanna",
+      "Buzz",
+      "Travis",
+      "Paula",
+      "J",
+    ]);
   });
 });
 
@@ -54,7 +62,7 @@ describe("getEmployedPeople() tests", () => {
       age: 47,
       height: 170,
       interests: ["swimming", "reading", "juggling"],
-      isEmployed: true
+      isEmployed: true,
     },
     {
       id: "004",
@@ -62,7 +70,7 @@ describe("getEmployedPeople() tests", () => {
       age: 32,
       height: 190,
       interests: ["shooting", "MMA", "writing"],
-      isEmployed: true
+      isEmployed: true,
     },
     {
       id: "005",
@@ -70,8 +78,8 @@ describe("getEmployedPeople() tests", () => {
       age: 22,
       height: 160,
       interests: ["swimming", "watching TV", "knitting"],
-      isEmployed: true
-    }
+      isEmployed: true,
+    },
   ];
 
   it("Fetch should have been called once", () => {
@@ -95,7 +103,7 @@ describe("findPersonWithId() tests", () => {
     age: 47,
     height: 170,
     interests: ["swimming", "reading", "juggling"],
-    isEmployed: true
+    isEmployed: true,
   };
 
   const dummyId005 = {
@@ -104,11 +112,14 @@ describe("findPersonWithId() tests", () => {
     age: 22,
     height: 160,
     interests: ["swimming", "watching TV", "knitting"],
-    isEmployed: true
+    isEmployed: true,
   };
 
   it("Should return a single object", async () => {
-    const returnFromFunction = await findPersonWithId("./mockPersonApi.json", "001");
+    const returnFromFunction = await findPersonWithId(
+      "./mockPersonApi.json",
+      "001"
+    );
     expect(typeof returnFromFunction).toBe("object");
     expect(returnFromFunction).toHaveProperty("id");
   });
@@ -137,7 +148,7 @@ describe("getPeopleWithMatchingInterests() tests", () => {
       age: 47,
       height: 170,
       interests: ["swimming", "reading", "juggling"],
-      isEmployed: true
+      isEmployed: true,
     },
     {
       id: "005",
@@ -145,8 +156,8 @@ describe("getPeopleWithMatchingInterests() tests", () => {
       age: 22,
       height: 160,
       interests: ["swimming", "watching TV", "knitting"],
-      isEmployed: true
-    }
+      isEmployed: true,
+    },
   ];
 
   const dummyMma = [
@@ -156,7 +167,7 @@ describe("getPeopleWithMatchingInterests() tests", () => {
       age: 78,
       height: 140,
       interests: ["knitting", "baking", "MMA"],
-      isEmployed: false
+      isEmployed: false,
     },
     {
       id: "004",
@@ -164,27 +175,39 @@ describe("getPeopleWithMatchingInterests() tests", () => {
       age: 32,
       height: 190,
       interests: ["shooting", "MMA", "writing"],
-      isEmployed: true
-    }
+      isEmployed: true,
+    },
   ];
 
   it("Should return an array if interests are found", async () => {
-    const swimmingInterest = await getPeopleWithMatchingInterests("./mockPersonApi.json", "swimming");
+    const swimmingInterest = await getPeopleWithMatchingInterests(
+      "./mockPersonApi.json",
+      "swimming"
+    );
     expect(Array.isArray(swimmingInterest)).toBe(true);
   });
 
   it("Should return all people with a matching interest (swimming)", async () => {
-    const swimmingInterest = await getPeopleWithMatchingInterests("./mockPersonApi.json", "swimming");
+    const swimmingInterest = await getPeopleWithMatchingInterests(
+      "./mockPersonApi.json",
+      "swimming"
+    );
     expect(swimmingInterest).toStrictEqual(dummySwimming);
   });
 
   it("Should return all people with a matching interest (mma)", async () => {
-    const mmaInterests = await getPeopleWithMatchingInterests("./mockPersonApi.json", "MMA");
+    const mmaInterests = await getPeopleWithMatchingInterests(
+      "./mockPersonApi.json",
+      "MMA"
+    );
     expect(mmaInterests).toStrictEqual(dummyMma);
   });
 
   it("Should return 'No people with interest found' if no matching interests on people", async () => {
-    const noInterests = await getPeopleWithMatchingInterests("./mockPersonApi.json", "whittling");
+    const noInterests = await getPeopleWithMatchingInterests(
+      "./mockPersonApi.json",
+      "whittling"
+    );
     expect(noInterests).toBe("No people with interest found");
   });
 });
@@ -199,7 +222,7 @@ describe("setDescription() tests", () => {
       id: "001",
       interests: ["swimming", "reading", "juggling"],
       isEmployed: true,
-      name: "Peter"
+      name: "Peter",
     },
     {
       age: 16,
@@ -209,7 +232,7 @@ describe("setDescription() tests", () => {
       id: "002",
       interests: ["writing", "hiking", "watching TV"],
       isEmployed: false,
-      name: "Georgia"
+      name: "Georgia",
     },
     {
       age: 78,
@@ -219,7 +242,7 @@ describe("setDescription() tests", () => {
       id: "003",
       interests: ["knitting", "baking", "MMA"],
       isEmployed: false,
-      name: "Joanna"
+      name: "Joanna",
     },
     {
       age: 32,
@@ -229,7 +252,7 @@ describe("setDescription() tests", () => {
       id: "004",
       interests: ["shooting", "MMA", "writing"],
       isEmployed: true,
-      name: "Buzz"
+      name: "Buzz",
     },
     {
       age: 22,
@@ -239,7 +262,7 @@ describe("setDescription() tests", () => {
       id: "005",
       interests: ["swimming", "watching TV", "knitting"],
       isEmployed: true,
-      name: "Travis"
+      name: "Travis",
     },
     {
       age: 27,
@@ -249,7 +272,7 @@ describe("setDescription() tests", () => {
       id: "006",
       interests: ["baking", "hiking", "shooting"],
       isEmployed: false,
-      name: "Paula"
+      name: "Paula",
     },
     {
       age: 50,
@@ -259,17 +282,21 @@ describe("setDescription() tests", () => {
       id: "007",
       interests: ["reading", "juggling", "knitting"],
       isEmployed: false,
-      name: "J"
-    }
+      name: "J",
+    },
   ];
 
   it("Should not modify original data", async () => {
-    const peopleWithDescriptions = await setDescriptions("./mockPersonApi.json");
+    const peopleWithDescriptions = await setDescriptions(
+      "./mockPersonApi.json"
+    );
     expect(peopleWithDescriptions).not.toStrictEqual(people);
   });
 
   it("Should add a description key", async () => {
-    const peopleWithDescriptions = await setDescriptions("./mockPersonApi.json");
+    const peopleWithDescriptions = await setDescriptions(
+      "./mockPersonApi.json"
+    );
     expect(peopleWithDescriptions[0]).toHaveProperty("description");
   });
 
@@ -290,23 +317,23 @@ describe("setInterestDetails() tests", () => {
           costPerAnnum: 800,
           interest: "swimming",
           isDoneInGroups: false,
-          sizeOfCommunity: 20000000
+          sizeOfCommunity: 20000000,
         },
         {
           costPerAnnum: 500,
           interest: "reading",
           isDoneInGroups: false,
-          sizeOfCommunity: 30000000
+          sizeOfCommunity: 30000000,
         },
         {
           costPerAnnum: 100,
           interest: "juggling",
           isDoneInGroups: false,
-          sizeOfCommunity: 1000000
-        }
+          sizeOfCommunity: 1000000,
+        },
       ],
       isEmployed: true,
-      name: "Peter"
+      name: "Peter",
     },
     {
       age: 16,
@@ -317,23 +344,23 @@ describe("setInterestDetails() tests", () => {
           costPerAnnum: 200,
           interest: "writing",
           isDoneInGroups: false,
-          sizeOfCommunity: 15000000
+          sizeOfCommunity: 15000000,
         },
         {
           costPerAnnum: 1000,
           interest: "hiking",
           isDoneInGroups: true,
-          sizeOfCommunity: 25000000
+          sizeOfCommunity: 25000000,
         },
         {
           costPerAnnum: 200,
           interest: "watching TV",
           isDoneInGroups: true,
-          sizeOfCommunity: 450000000
-        }
+          sizeOfCommunity: 450000000,
+        },
       ],
       isEmployed: false,
-      name: "Georgia"
+      name: "Georgia",
     },
     {
       age: 78,
@@ -344,23 +371,23 @@ describe("setInterestDetails() tests", () => {
           costPerAnnum: 400,
           interest: "knitting",
           isDoneInGroups: false,
-          sizeOfCommunity: 10000000
+          sizeOfCommunity: 10000000,
         },
         {
           costPerAnnum: 400,
           interest: "baking",
           isDoneInGroups: false,
-          sizeOfCommunity: 20000000
+          sizeOfCommunity: 20000000,
         },
         {
           costPerAnnum: 1000,
           interest: "MMA",
           isDoneInGroups: true,
-          sizeOfCommunity: 20000000
-        }
+          sizeOfCommunity: 20000000,
+        },
       ],
       isEmployed: false,
-      name: "Joanna"
+      name: "Joanna",
     },
     {
       age: 32,
@@ -371,23 +398,23 @@ describe("setInterestDetails() tests", () => {
           costPerAnnum: 10000,
           interest: "shooting",
           isDoneInGroups: true,
-          sizeOfCommunity: 5000000
+          sizeOfCommunity: 5000000,
         },
         {
           costPerAnnum: 1000,
           interest: "MMA",
           isDoneInGroups: true,
-          sizeOfCommunity: 20000000
+          sizeOfCommunity: 20000000,
         },
         {
           costPerAnnum: 200,
           interest: "writing",
           isDoneInGroups: false,
-          sizeOfCommunity: 15000000
-        }
+          sizeOfCommunity: 15000000,
+        },
       ],
       isEmployed: true,
-      name: "Buzz"
+      name: "Buzz",
     },
     {
       age: 22,
@@ -398,23 +425,23 @@ describe("setInterestDetails() tests", () => {
           costPerAnnum: 800,
           interest: "swimming",
           isDoneInGroups: false,
-          sizeOfCommunity: 20000000
+          sizeOfCommunity: 20000000,
         },
         {
           costPerAnnum: 200,
           interest: "watching TV",
           isDoneInGroups: true,
-          sizeOfCommunity: 450000000
+          sizeOfCommunity: 450000000,
         },
         {
           costPerAnnum: 400,
           interest: "knitting",
           isDoneInGroups: false,
-          sizeOfCommunity: 10000000
-        }
+          sizeOfCommunity: 10000000,
+        },
       ],
       isEmployed: true,
-      name: "Travis"
+      name: "Travis",
     },
     {
       age: 27,
@@ -425,23 +452,23 @@ describe("setInterestDetails() tests", () => {
           costPerAnnum: 400,
           interest: "baking",
           isDoneInGroups: false,
-          sizeOfCommunity: 20000000
+          sizeOfCommunity: 20000000,
         },
         {
           costPerAnnum: 1000,
           interest: "hiking",
           isDoneInGroups: true,
-          sizeOfCommunity: 25000000
+          sizeOfCommunity: 25000000,
         },
         {
           costPerAnnum: 10000,
           interest: "shooting",
           isDoneInGroups: true,
-          sizeOfCommunity: 5000000
-        }
+          sizeOfCommunity: 5000000,
+        },
       ],
       isEmployed: false,
-      name: "Paula"
+      name: "Paula",
     },
     {
       age: 50,
@@ -452,24 +479,24 @@ describe("setInterestDetails() tests", () => {
           costPerAnnum: 500,
           interest: "reading",
           isDoneInGroups: false,
-          sizeOfCommunity: 30000000
+          sizeOfCommunity: 30000000,
         },
         {
           costPerAnnum: 100,
           interest: "juggling",
           isDoneInGroups: false,
-          sizeOfCommunity: 1000000
+          sizeOfCommunity: 1000000,
         },
         {
           costPerAnnum: 400,
           interest: "knitting",
           isDoneInGroups: false,
-          sizeOfCommunity: 10000000
-        }
+          sizeOfCommunity: 10000000,
+        },
       ],
       isEmployed: false,
-      name: "J"
-    }
+      name: "J",
+    },
   ];
 
   it("should call fetch twice", async () => {
@@ -478,21 +505,38 @@ describe("setInterestDetails() tests", () => {
   });
 
   it("Should not modify original data", async () => {
-    const detailedInterestsResponse = await setInterestDetails("./mockPersonApi.json", "./mockInterestsApi.json");
+    const detailedInterestsResponse = await setInterestDetails(
+      "./mockPersonApi.json",
+      "./mockInterestsApi.json"
+    );
     expect(detailedInterestsResponse).not.toStrictEqual(people);
   });
 
   it("Should turn the interests key into an array of objects", async () => {
-    const detailedInterestsResponse = await setInterestDetails("./mockPersonApi.json", "./mockInterestsApi.json");
+    const detailedInterestsResponse = await setInterestDetails(
+      "./mockPersonApi.json",
+      "./mockInterestsApi.json"
+    );
     expect(Array.isArray(detailedInterestsResponse[0].interests)).toBe(true);
-    expect(detailedInterestsResponse[0].interests[0]).toHaveProperty("costPerAnnum");
-    expect(detailedInterestsResponse[0].interests[0]).toHaveProperty("interest");
-    expect(detailedInterestsResponse[0].interests[0]).toHaveProperty("isDoneInGroups");
-    expect(detailedInterestsResponse[0].interests[0]).toHaveProperty("sizeOfCommunity");
+    expect(detailedInterestsResponse[0].interests[0]).toHaveProperty(
+      "costPerAnnum"
+    );
+    expect(detailedInterestsResponse[0].interests[0]).toHaveProperty(
+      "interest"
+    );
+    expect(detailedInterestsResponse[0].interests[0]).toHaveProperty(
+      "isDoneInGroups"
+    );
+    expect(detailedInterestsResponse[0].interests[0]).toHaveProperty(
+      "sizeOfCommunity"
+    );
   });
 
   it("Should match the exact dummy array of objects", async () => {
-    const detailedInterestsResponse = await setInterestDetails("./mockPersonApi.json", "./mockInterestsApi.json");
+    const detailedInterestsResponse = await setInterestDetails(
+      "./mockPersonApi.json",
+      "./mockInterestsApi.json"
+    );
     expect(detailedInterestsResponse).toStrictEqual(dummyDetailedInterests);
   });
 });
